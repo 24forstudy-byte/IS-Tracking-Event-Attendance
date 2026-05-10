@@ -4,6 +4,23 @@ from models.event import get_all_events, get_event_by_id
 from models.staff import get_all_staffs
 from datetime import datetime
 
+def menu_application_participant():
+    """Точка входа в управление заявками и участниками"""
+    while True:
+        print("\n--- Заявки и участники ---")
+        print("1. Управление участниками")
+        print("2. Управление заявками")
+        print("0. Назад")
+        sub = input("Выберите действие: ")
+        if sub == "1":
+            menu_participant()
+        elif sub == "2":
+            menu_application()
+        elif sub == "0":
+            break
+        else:
+            print("Неверный ввод. 🛑")
+
 def menu_participant():
     """Меню управления участниками"""
 

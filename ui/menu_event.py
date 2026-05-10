@@ -32,6 +32,9 @@ def menu_event():
             for t in event_types:
                 print(f"{t.EventTypeID} - {t.Title}")
             type_id = int(input("Введите ID типа мероприятия: "))
+            if get_event_by_id(type_id) is None:
+                print("Тип мероприятия с таким ID не найден. ⛔")
+                continue
 
             # Выбор места
             print("\nДоступные места:")
@@ -39,6 +42,9 @@ def menu_event():
             for p in places:
                 print(f"{p.PlaceID} - {p.Title}")
             place_id = int(input("Введите ID места: "))
+            if get_place_by_id(place_id) is None:
+                print("Место с таким ID не найдено. ⛔")
+                continue
 
             event = Event(
                 EventTypeID=type_id,
@@ -67,6 +73,9 @@ def menu_event():
             for t in get_all_event_types():
                 print(f"{t.EventTypeID} - {t.Title}")
             type_id_str = input("Введите новый ID типа (оставьте пустым, чтобы не менять): ")
+            if get_event_type_by_id(type_id) is None:
+                print("Тип мероприятия с таким ID не найден. ⛔")
+                continue
 
             # Выбор места
             print(f"\nТекущее место ID: {current_event.PlaceID}")
@@ -74,6 +83,9 @@ def menu_event():
             for p in get_all_places():
                 print(f"{p.PlaceID} - {p.Title}")
             place_id_str = input("Введите новый ID места (оставьте пустым, чтобы не менять): ")
+            if get_place_by_id(place_id) is None:
+                print("Место с таким ID не найдено. ⛔")
+                continue
 
             
             event = Event(
@@ -88,10 +100,13 @@ def menu_event():
             print("Мероприятие обновлено! 🖌️")
 
         elif choice == "4":
-            id_to_delete = input("Введите ID мероприятия для удаления: ")
-            event = Event(EventID=int(id_to_delete))
-            event.delete()
-            print("Мероприятие удалено! ❌")
+            id_to_delete = int(input("Введите ID мероприятия для удаления: "))
+            event = get_event_by_id(id_to_delete)          
+            if not event:
+                print("Мероприятие не найдено. ⛔")
+            else:
+                event.delete()
+                print("Мероприятие удалено! ❌")
 
         elif choice == "5":
             print("\n=== Архивирование мероприятия ===")

@@ -2,23 +2,6 @@ from models.event import get_all_events
 from models.application import get_all_applications
 from models.participant import get_participant_by_id
 
-def menu_application_participant():
-    """Точка входа в управление заявками и участниками"""
-    while True:
-        print("\n--- Заявки и участники ---")
-        print("1. Управление участниками")
-        print("2. Управление заявками")
-        print("0. Назад")
-        sub = input("Выберите действие: ")
-        if sub == "1":
-            menu_participant()
-        elif sub == "2":
-            menu_application()
-        elif sub == "0":
-            break
-        else:
-            print("Неверный ввод. 🛑")
-
 def menu_reports():
     """Меню аналитики и отчётности"""
     while True:

@@ -5,7 +5,9 @@ from config import DB_NAME
 # Функция для подключения к базе данных
 def get_connection():
     # Возвращает объект соединения с указанной базой данных
-    return sqlite3.connect(DB_NAME)
+    conn = sqlite3.connect(DB_NAME)
+    conn.execute("PRAGMA foreign_keys = ON")
+    return conn
 
 # Функция инициализации базы данных: создаёт все таблицы, если они ещё не существуют
 def initialize_db():

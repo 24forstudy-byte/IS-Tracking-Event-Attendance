@@ -1,7 +1,7 @@
 from database.db_manager import initialize_db
 from ui.menu import show_main_menu
 from ui.menu_event import menu_event
-from ui.menu_application_participant import menu_application, menu_participant
+from ui.menu_application_participant import menu_application_participant
 from ui.menu_analytics_reporting import menu_reports
 from ui.menu_references import menu_references
 
