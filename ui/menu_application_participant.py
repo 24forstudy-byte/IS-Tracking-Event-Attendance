@@ -7,12 +7,6 @@ from datetime import datetime
 def menu_participant():
     """Меню управления участниками"""
 
-    staff_list = get_all_staffs()
-    if not staff_list:
-        print("Нет персонала в базе. Сначала добавьте персонал через меню 'Справочники'.")
-        return
-    staff_id = staff_list[0].StaffID
-
     while True:
         print("\n=== Участники 👥 ===")
         print("1. Показать всех участников")
@@ -86,16 +80,11 @@ def menu_participant():
 def menu_application():
     """Меню управления заявками"""
 
-    print("\nВыберите сотрудника, от имени которого оформляются заявки:")
     staff_list = get_all_staffs()
-    for s in staff_list:
-        print(f"{s.StaffID}. {s.FullName} ({s.Phone})")
-    staff_id = int(input("Введите ID сотрудника: "))
-    staff = get_staff_by_id(staff_id)
-    if not staff:
-        print("Сотрудник не найден. Возврат в главное меню.")
+    if not staff_list:
+        print("Нет персонала в базе. Сначала добавьте персонал через меню 'Справочники'.")
         return
-    print(f"Текущий сотрудник: {staff.FullName}")
+    staff_id = staff_list[0].StaffID
 
     while True:
         print("\n=== Заявки 📋 ===")
