@@ -39,7 +39,7 @@ def initialize_db():
                    EventID INTEGER, -- Номер мероприятия (внешний ключ)
                    StaffID INTEGER, -- Номер персонала (внешний ключ)
                    FOREIGN KEY (ParticipantID) REFERENCES Participant(ParticipantID), -- Связь с таблицей участника
-                   FOREIGN KEY (EventID) REFERENCES Event(EventID), -- Связь с таблицей мероприятия
+                   FOREIGN KEY (EventID) REFERENCES Event(EventID) ON DELETE CASCADE, -- Связь с таблицей мероприятия
                    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID) -- Связь с таблицей персонала
                     )
                 ''')

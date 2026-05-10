@@ -72,7 +72,7 @@ def menu_event():
             print("Доступные типы мероприятия:")
             for t in get_all_event_types():
                 print(f"{t.EventTypeID} - {t.Title}")
-            type_id_str = input("Введите новый ID типа (оставьте пустым, чтобы не менять): ")
+            type_id_str = input("Введите новый ID типа: ")
             if get_event_type_by_id(type_id) is None:
                 print("Тип мероприятия с таким ID не найден. ⛔")
                 continue
@@ -82,7 +82,7 @@ def menu_event():
             print("Доступные места:")
             for p in get_all_places():
                 print(f"{p.PlaceID} - {p.Title}")
-            place_id_str = input("Введите новый ID места (оставьте пустым, чтобы не менять): ")
+            place_id_str = input("Введите новый ID места: ")
             if get_place_by_id(place_id) is None:
                 print("Место с таким ID не найдено. ⛔")
                 continue
@@ -104,9 +104,14 @@ def menu_event():
             event = get_event_by_id(id_to_delete)          
             if not event:
                 print("Мероприятие не найдено. ⛔")
-            else:
-                event.delete()
-                print("Мероприятие удалено! ❌")
+                continue
+
+            if event.Status == "Архивировано":
+                print("Нельзя удалить архивированное мероприятие. ⛔")
+                continue
+                
+            event.delete()
+            print("Мероприятие удалено! ❌")
 
         elif choice == "5":
             print("\n=== Архивирование мероприятия ===")
