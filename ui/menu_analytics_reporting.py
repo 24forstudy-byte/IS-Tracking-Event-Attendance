@@ -1,4 +1,4 @@
-from models.event import get_all_events
+from models.event import get_all_events, get_event_by_id
 from models.application import get_all_applications
 from models.participant import get_participant_by_id
 
@@ -15,13 +15,17 @@ def menu_reports():
         if choice == "1":
             print("\n=== Список участников по мероприятию ===")
             event_id = int(input("Введите ID мероприятия: "))
+            event = get_event_by_id(event_id)
+            if not event:
+                print("Мероприятие не найдено. ⛔")
+                continue
             all_apps = get_all_applications()
             filtered_apps = [a for a in all_apps if a.EventID == event_id]
 
             if not filtered_apps:
                 print("На это мероприятие ещё никто не зарегистрирован.")
             else:
-                print(f"\nСписок участников мероприятия (ID: {event_id}):")
+                print(f"\nСписок участников мероприятия «{event.Title}» (ID: {event_id}):")
                 for a in filtered_apps:
                     p = get_participant_by_id(a.ParticipantID)
                     if p:
