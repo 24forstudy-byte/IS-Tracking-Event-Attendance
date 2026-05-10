@@ -18,13 +18,13 @@ def initialize_db():
     cursor.execute('''
                    CREATE TABLE IF NOT EXISTS Event (
                    EventID INTEGER PRIMARY KEY AUTOINCREMENT, -- Номер мероприятия
+                   Title TEXT NOT NULL, -- Название мероприятия
+                   DateTime TEXT NOT NULL, -- Дата и время
+                   Status TEXT NOT NULL, -- Статус мероприятия
                    EventTypeID INTEGER, -- Номер типа мероприятия (внешний ключ)
                    PlaceID INTEGER, -- Номер места (внешний ключ)
                    FOREIGN KEY (EventTypeID) REFERENCES EventType(EventTypeID), -- Связь с таблицей типа мероприятия
-                   FOREIGN KEY (PlaceID) REFERENCES Place(PlaceID), -- Связь с таблицей места
-                   Title TEXT NOT NULL, -- Название мероприятия
-                   DateTime TEXT NOT NULL, -- Дата и время
-                   Status TEXT NOT NULL -- Статус мероприятия
+                   FOREIGN KEY (PlaceID) REFERENCES Place(PlaceID) -- Связь с таблицей места
                     )
                 ''')
     
@@ -32,13 +32,13 @@ def initialize_db():
     cursor.execute('''
                    CREATE TABLE IF NOT EXISTS Application (
                    ApplicationID INTEGER PRIMARY KEY AUTOINCREMENT, -- Номер заявки
+                   DateTime TEXT NOT NULL, -- Дата и время
                    ParticipantID INTEGER, -- Номер участника (внешний ключ)
                    EventID INTEGER, -- Номер мероприятия (внешний ключ)
                    StaffID INTEGER, -- Номер персонала (внешний ключ)
                    FOREIGN KEY (ParticipantID) REFERENCES Participant(ParticipantID), -- Связь с таблицей участника
                    FOREIGN KEY (EventID) REFERENCES Event(EventID), -- Связь с таблицей мероприятия
-                   FOREIGN KEY (StaffID) REFERENCES Staff(StaffID), -- Связь с таблицей персонала
-                   DateTime TEXT NOT NULL -- Дата и время
+                   FOREIGN KEY (StaffID) REFERENCES Staff(StaffID) -- Связь с таблицей персонала
                     )
                 ''')
     
@@ -65,7 +65,7 @@ def initialize_db():
     # Создание таблицы "Место"
     cursor.execute('''
                    CREATE TABLE IF NOT EXISTS Place (
-                   PlaceID INTEGER PRIMARY KER AUTOINCREMENT, -- Номер места
+                   PlaceID INTEGER PRIMARY KEY AUTOINCREMENT, -- Номер места
                    Title TEXT NOT NULL, -- Название
                    Address TEXT NOT NULL -- Адрес
                     )
