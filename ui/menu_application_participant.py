@@ -1,7 +1,7 @@
 from models.application import Application, get_all_applications, get_application_by_id
 from models.participant import Participant, get_all_participants, get_participant_by_id
 from models.event import get_all_events, get_event_by_id
-from models.staff import get_staff_by_id
+from models.staff import get_all_staffs
 from datetime import datetime
 
 def menu_participant():
@@ -14,6 +14,7 @@ def menu_participant():
         print("3. Обновить участника")
         print("4. Удалить участника")
         print("5. Получить участника")
+        print("6. Посмотреть историю регистраций участника")
         print("0. Назад в главное меню")
         choice = input("Выберите действие: ")
 
@@ -70,6 +71,24 @@ def menu_participant():
                 print(f"Участник найден! ФИО: {p.FullName} | телефон: {p.Phone} | почта: {p.Mail}")
             else:
                 print("Участник не найден. ⛔")
+
+        elif choice == "6":
+            participant_id = int(input("Введите ID участника для просмотра истории: "))
+            p = get_participant_by_id(participant_id)
+            if not p:
+                print("Участник не найден. ⛔")
+                continue
+
+            all_apps = get_all_applications()
+            history = [a for a in all_apps if a.ParticipantID == participant_id]
+            if not history:
+                print("У участника нет зарегистрированных заявок.")
+            else:
+                print(f"\nИстория регистраций участника {p.FullName}:")
+                for a in history:
+                    event = get_event_by_id(a.EventID)
+                    event_title = event.Title if event else "Мероприятие не найдено"
+                    print(f"Заявка №{a.ApplicationID}: {event_title} | Дата: {a.DateTime}")
 
         elif choice == "0":
             break
