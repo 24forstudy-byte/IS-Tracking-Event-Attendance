@@ -25,18 +25,7 @@ class Staff:
         conn.commit()
         conn.close()
     
-    def delete(self):
-        """Удаляет персонал"""
-        if self.StaffID is not None:
-            conn = get_connection()
-            cursor = conn.cursor()
-            cursor.execute(
-                "DELETE FROM Staff WHERE StaffID = ?", (self.StaffID,)
-            )
-            conn.commit()
-            conn.close()
-
-# Вспомогательные функции
+# Вспомогательная функция
 
 def get_all_staffs():
     """Возвращает список всего персонала"""
@@ -49,15 +38,3 @@ def get_all_staffs():
     conn.close()
     return [Staff(StaffID=row[0], FullName=row[1], Phone=row[2], Mail=row[3]) for row in rows]
 
-def get_staff_by_id(StaffID):
-    """Возвращает персонал по StaffID"""
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(
-        "SELECT StaffID, FullName, Phone, Mail FROM Staff WHERE StaffID = ?", (StaffID,)
-    )
-    row = cursor.fetchone()
-    conn.close()
-    if row:
-        return Staff(StaffID=row[0], FullName=row[1], Phone=row[2], Mail=row[3])
-    return None
