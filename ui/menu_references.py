@@ -69,9 +69,13 @@ def menu_place():
 
         elif choice == "4":
             place_id = int(input("Введите ID места для удаления: "))
-            place = Place(PlaceID=place_id)
-            place.delete()
-            print("Место удалено! ❌")
+            p = get_place_by_id(place_id)
+            if not p:
+                print("Место не найдено. ⛔")
+            else:
+                place = Place(PlaceID=place_id)
+                place.delete()
+                print("Место удалено! ❌")
 
         elif choice == "0":
             break
@@ -81,7 +85,7 @@ def menu_place():
 def menu_event_type():
     """Меню управления типами мероприятий"""
     while True:
-        print("\n=== Типы мероприятий 🏷️ ===")
+        print("\n=== Типы мероприятий 🏷️  ===")
         print("1. Показать все типы")
         print("2. Добавить тип")
         print("3. Обновить тип")
@@ -120,9 +124,13 @@ def menu_event_type():
 
         elif choice == "4":
             type_id = int(input("Введите ID типа для удаления: "))
-            event_type = EventType(EventTypeID=type_id)
-            event_type.delete()
-            print("Тип удалён! ❌")
+            t = get_event_type_by_id(type_id)
+            if not t:
+                print("Тип мероприятий не найден. ⛔")
+            else:
+                event_type = EventType(EventTypeID=type_id)
+                event_type.delete()
+                print("Тип удалён! ❌")
 
         elif choice == "0":
             break
@@ -144,12 +152,11 @@ def menu_staff():
                 print("Сотрудник ещё не создан.")
             else:
                 for s in staff_list:
-                    print(f"ID: {s.StaffID}. ФИО: {s.FullName}, Телефон: {s.Phone}, Почта: {s.Mail}")
+                    print(f"{s.StaffID} | ФИО: {s.FullName} | Телефон: {s.Phone} | Почта: {s.Mail}")
 
         elif choice == "2":
             staff_list = get_all_staffs()
             if not staff_list:
-                # Создаём единственного сотрудника
                 print("Сотрудник не найден. Создание нового.")
                 fullname = input("ФИО: ")
                 phone = input("Телефон: ")
@@ -158,7 +165,6 @@ def menu_staff():
                 staff.save()
                 print("Сотрудник создан! 👍")
             else:
-                # Обновляем данные первого (единственного) сотрудника
                 s = staff_list[0]
                 print("\nОставьте поле пустым, чтобы не изменять значение")
                 fullname = input("Новое ФИО: ")

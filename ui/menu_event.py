@@ -32,7 +32,7 @@ def menu_event():
             for t in event_types:
                 print(f"{t.EventTypeID} - {t.Title}")
             type_id = int(input("Введите ID типа мероприятия: "))
-            if get_event_by_id(type_id) is None:
+            if get_event_type_by_id(type_id) is None:
                 print("Тип мероприятия с таким ID не найден. ⛔")
                 continue
 

@@ -77,9 +77,13 @@ def menu_participant():
 
         elif choice == "4":
             participant_id = int(input("Введите ID участника для удаления: "))
-            participant = Participant(ParticipantID=participant_id)
-            participant.delete()
-            print("Участник удалён! ❌")
+            p = get_participant_by_id(participant_id)
+            if not p:
+                print("Участник не найден. ⛔")
+            else:
+                participant = Participant(ParticipantID=participant_id)
+                participant.delete()
+                print("Участник удалён! ❌")
 
         elif choice == "5":
             participant_id = int(input("Введите ID участника: "))
