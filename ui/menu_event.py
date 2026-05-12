@@ -72,29 +72,30 @@ def menu_event():
             print("Доступные типы мероприятия:")
             for t in get_all_event_types():
                 print(f"{t.EventTypeID} - {t.Title}")
-            type_id_str = input("Введите новый ID типа: ")
-            if get_event_type_by_id(type_id) is None:
-                print("Тип мероприятия с таким ID не найден. ⛔")
-                continue
+            type_id_str = input("Введите новый ID типа (оставьте пустым, чтобы не менять): ")
+            if type_id_str:
+                if get_event_type_by_id(int(type_id_str)) is None:
+                    print("Тип мероприятия с таким ID не найден. ⛔")
+                    continue
 
             # Выбор места
             print(f"\nТекущее место ID: {current_event.PlaceID}")
             print("Доступные места:")
             for p in get_all_places():
                 print(f"{p.PlaceID} - {p.Title}")
-            place_id_str = input("Введите новый ID места: ")
-            if get_place_by_id(place_id) is None:
-                print("Место с таким ID не найдено. ⛔")
-                continue
+            place_id_str = input("Введите новый ID места (оставьте пустым, чтобы не менять): ")
+            if place_id_str:
+                if get_place_by_id(int(place_id_str)) is None:
+                    print("Место с таким ID не найдено. ⛔")
+                    continue
 
-            
             event = Event(
-                EventID=id_to_update,  
+                EventID=id_to_update,
                 EventTypeID=int(type_id_str) if type_id_str else current_event.EventTypeID,
                 PlaceID=int(place_id_str) if place_id_str else current_event.PlaceID,
                 Title=title if title else current_event.Title,
                 DateTime=date_time if date_time else current_event.DateTime,
-                Status=current_event.Status  
+                Status=current_event.Status
             )
             event.save()
             print("Мероприятие обновлено! 🖌️")
