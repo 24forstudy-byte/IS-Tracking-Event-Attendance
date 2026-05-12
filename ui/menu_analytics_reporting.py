@@ -29,7 +29,7 @@ def menu_reports():
                 for a in filtered_apps:
                     p = get_participant_by_id(a.ParticipantID)
                     if p:
-                        print(f"  {p.FullName} | Тел: {p.Phone} | Почта: {p.Mail}")
+                        print(f"\n{p.FullName}\nТел: {p.Phone}\nПочта: {p.Mail}")
                     else:
                         print("Участник не найден в базе")
 
@@ -42,7 +42,7 @@ def menu_reports():
             else:
                 for e in events:
                     count = len([a for a in all_apps if a.EventID == e.EventID])
-                    print(f"{e.Title} | Дата: {e.DateTime} | Статус: {e.Status} | Заявок: {count}")
+                    print(f"\n{e.Title}\nДата: {e.DateTime}\nСтатус: {e.Status}\nЗаявок: {count}")
 
         elif choice == "3":
             print("\n=== Статистика по мероприятиям и участникам ===")

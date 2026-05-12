@@ -39,7 +39,7 @@ def menu_participant():
             participants = get_all_participants()
             print("\nСписок участников:")
             for p in participants:
-                print(f"{p.ParticipantID}. ФИО: {p.FullName} | Телефон: {p.Phone} | Почта: {p.Mail}")
+                print(f"{p.ParticipantID}. ФИО: {p.FullName}\nТелефон: {p.Phone}\nПочта: {p.Mail}")
 
         elif choice == "2":
             print("\n=== Добавление нового участника ===")
@@ -89,7 +89,7 @@ def menu_participant():
             participant_id = int(input("Введите ID участника: "))
             p = get_participant_by_id(participant_id)
             if p:
-                print(f"Участник найден! ФИО: {p.FullName} | телефон: {p.Phone} | почта: {p.Mail}")
+                print(f"Участник найден!\nФИО: {p.FullName}\nтелефон: {p.Phone}\nпочта: {p.Mail}")
             else:
                 print("Участник не найден. ⛔")
 
@@ -105,7 +105,7 @@ def menu_participant():
             if not history:
                 print("У участника нет зарегистрированных заявок.")
             else:
-                print(f"\nИстория регистраций участника {p.FullName}:")
+                print(f"\nИстория регистраций участника {p.FullName}")
                 for a in history:
                     event = get_event_by_id(a.EventID)
                     event_title = event.Title if event else "Мероприятие не найдено"
@@ -149,8 +149,8 @@ def menu_application():
                 p_name = participant.FullName if participant else "—"
                 e_title = event.Title if event else "—"
                 s_name = staff_name if staff_name else "—"
-                print(f"{a.ApplicationID}. Участник: {p_name} | "
-              f"Мероприятие: {e_title} | Сотрудник: {s_name} | "
+                print(f"{a.ApplicationID}. Участник: {p_name}\n"
+              f"Мероприятие: {e_title}\nСотрудник: {s_name}\n"
               f"Дата: {a.DateTime}")
 
         elif choice == "2":
@@ -192,9 +192,9 @@ def menu_application():
             app_id = int(input("Введите ID заявки: "))
             app = get_application_by_id(app_id)
             if app:
-                print(f"Заявка найдена: Участник {app.ParticipantID} | "
-                      f"Мероприятие {app.EventID} | Сотрудник {app.StaffID} | "
-                      f"Дата {app.DateTime}")
+                print(f"Заявка найдена!\nУчастник: {app.ParticipantID}\n"
+                      f"Мероприятие: {app.EventID}\nПерсонал: {app.StaffID}\n"
+                      f"Дата: {app.DateTime}")
             else:
                 print("Заявка не найдена. ⛔")
 

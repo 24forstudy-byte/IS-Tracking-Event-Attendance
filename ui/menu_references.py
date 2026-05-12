@@ -38,7 +38,7 @@ def menu_place():
             places = get_all_places()
             print("\nСписок мест:")
             for p in places:
-                print(f"{p.PlaceID}. Название: {p.Title} | Адрес: {p.Address}")
+                print(f"{p.PlaceID}. Название: {p.Title}\nАдрес: {p.Address}")
 
         elif choice == "2":
             print("\n=== Добавление нового места ===")
@@ -138,26 +138,26 @@ def menu_event_type():
             print("Неверный ввод. 🛑")
 
 def menu_staff():
-    """Меню управления персоналом (единственный сотрудник)"""
+    """Меню управления персоналом"""
     while True:
         print("\n=== Персонал 👤 ===")
-        print("1. Просмотреть данные сотрудника")
-        print("2. Обновить данные сотрудника")
+        print("1. Просмотреть данные персонала")
+        print("2. Обновить данные персонала")
         print("0. Назад")
         choice = input("Выберите действие: ")
 
         if choice == "1":
             staff_list = get_all_staffs()
             if not staff_list:
-                print("Сотрудник ещё не создан.")
+                print("Персонал ещё не создан.")
             else:
                 for s in staff_list:
-                    print(f"{s.StaffID} | ФИО: {s.FullName} | Телефон: {s.Phone} | Почта: {s.Mail}")
+                    print(f"{s.StaffID}. ФИО: {s.FullName}\nТелефон: {s.Phone}\nПочта: {s.Mail}")
 
         elif choice == "2":
             staff_list = get_all_staffs()
             if not staff_list:
-                print("Сотрудник не найден. Создание нового.")
+                print("Персонал не найден. Создание нового.")
                 fullname = input("ФИО: ")
                 phone = input("Телефон: ")
                 mail = input("Почта: ")
@@ -166,7 +166,7 @@ def menu_staff():
                     continue
                 staff = Staff(FullName=fullname, Phone=phone, Mail=mail)
                 staff.save()
-                print("Сотрудник создан! 👍")
+                print("Персонал создан! 👍")
             else:
                 s = staff_list[0]
                 print("\nОставьте поле пустым, чтобы не изменять значение")
