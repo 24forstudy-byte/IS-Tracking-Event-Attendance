@@ -177,6 +177,13 @@ def menu_application():
                 print("Мероприятие не найдено или архивировано. ⛔")
                 continue
 
+            
+            all_apps = get_all_applications()
+            already = [a for a in all_apps if a.ParticipantID == participant_id and a.EventID == event_id]
+            if already:
+                print("Участник уже зарегистрирован на это мероприятие. ⛔")
+                continue
+            
             date_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
             app = Application(
