@@ -21,8 +21,8 @@ def menu_event():
                 place = get_place_by_id(e.PlaceID)
                 type_title = event_type.Title if event_type else "—"
                 place_title = place.Title if place else "—"
-                print(f"{e.EventID}. Тип: {event_type} | Место: {place} | "
-                      f"Название: {type_title} | Дата: {e.DateTime} | Статус: {e.Status}")
+                print(f"{e.EventID}. Тип: {type_title} | Место: {place_title} | "
+                      f"Название: {e.Title} | Дата: {e.DateTime} | Статус: {e.Status}")
 
         elif choice == "2":
             print("\n=== Добавление нового мероприятия ===")
