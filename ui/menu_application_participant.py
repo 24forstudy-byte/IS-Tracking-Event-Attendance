@@ -138,9 +138,20 @@ def menu_application():
             applications = get_all_applications()
             print("\nСписок заявок:")
             for a in applications:
-                print(f"{a.ApplicationID}. Участник: {a.ParticipantID} | "
-                      f"Мероприятие: {a.EventID} | Сотрудник: {a.StaffID} | "
-                      f"Дата: {a.DateTime}")
+                participant = get_participant_by_id(a.ParticipantID)
+                event = get_event_by_id(a.EventID)
+                staff_list = get_all_staffs()
+                staff_name = ""
+                for s in staff_list:
+                    if s.StaffID == a.StaffID:
+                        staff_name = s.FullName
+                        break
+                p_name = participant.FullName if participant else "—"
+                e_title = event.Title if event else "—"
+                s_name = staff_name if staff_name else "—"
+                print(f"{a.ApplicationID}. Участник: {p_name} | "
+              f"Мероприятие: {e_title} | Сотрудник: {s_name} | "
+              f"Дата: {a.DateTime}")
 
         elif choice == "2":
             # Выбор участника

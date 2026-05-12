@@ -17,8 +17,12 @@ def menu_event():
             events = get_all_events()
             print("\nСписок мероприятий:")
             for e in events:
-                print(f"{e.EventID}. Тип: {e.EventTypeID} | Место: {e.PlaceID} | "
-                      f"Название: {e.Title} | Дата: {e.DateTime} | Статус: {e.Status}")
+                event_type = get_event_type_by_id(e.EventTypeID)
+                place = get_place_by_id(e.PlaceID)
+                type_title = event_type.Title if event_type else "—"
+                place_title = place.Title if place else "—"
+                print(f"{e.EventID}. Тип: {event_type} | Место: {place} | "
+                      f"Название: {type_title} | Дата: {e.DateTime} | Статус: {e.Status}")
 
         elif choice == "2":
             print("\n=== Добавление нового мероприятия ===")
@@ -68,7 +72,9 @@ def menu_event():
             date_time = input("Новая дата и время (%Y-%m-%d %H:%M): ")
 
             # Выбор типа мероприятия
-            print(f"\nТекущий тип мероприятия ID: {current_event.EventTypeID}")
+            current_type = get_event_type_by_id(current_event.EventTypeID)
+            type_info = f"{current_event.EventTypeID} ({current_type.Title})" if current_type else str(current_event.EventTypeID)
+            print(f"\nТекущий тип мероприятия: {type_info}")
             print("Доступные типы мероприятия:")
             for t in get_all_event_types():
                 print(f"{t.EventTypeID} - {t.Title}")
@@ -79,7 +85,9 @@ def menu_event():
                     continue
 
             # Выбор места
-            print(f"\nТекущее место ID: {current_event.PlaceID}")
+            current_place = get_place_by_id(current_event.PlaceID)
+            place_info = f"{current_event.PlaceID} ({current_place.Title})" if current_place else str(current_event.PlaceID)
+            print(f"\nТекущее место: {place_info}")
             print("Доступные места:")
             for p in get_all_places():
                 print(f"{p.PlaceID} - {p.Title}")
