@@ -161,6 +161,9 @@ def menu_staff():
                 fullname = input("ФИО: ")
                 phone = input("Телефон: ")
                 mail = input("Почта: ")
+                if not fullname or not phone or not mail:
+                    print("Неверный ввод: все поля обязательны для заполнения.")
+                    continue
                 staff = Staff(FullName=fullname, Phone=phone, Mail=mail)
                 staff.save()
                 print("Сотрудник создан! 👍")
