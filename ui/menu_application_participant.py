@@ -198,12 +198,24 @@ def menu_application():
         elif choice == "3":
             app_id = int(input("Введите ID заявки: "))
             app = get_application_by_id(app_id)
+            participant1 = get_participant_by_id(app.ParticipantID)
+            event1 = get_event_by_id(app.EventID)
+            staff_list1 = get_all_staffs()
+            staff_name1 = ""
+            for s in staff_list1:
+                if s.StaffID == app.StaffID:
+                    staff_name1 = s.FullName
+                    break
+            app_name = participant.FullName if participant1 else "—"
+            app_title = event.Title if event1 else "—"
+            s_name = staff_name1 if staff_name1 else "—"
             if app:
-                print(f"Заявка найдена!\nУчастник: {app.ParticipantID}\n"
-                      f"Мероприятие: {app.EventID}\nПерсонал: {app.StaffID}\n"
+                print(f"Заявка найдена!\nУчастник: {app_name}\n"
+                      f"Мероприятие: {app_title}\nПерсонал: {s_name}\n"
                       f"Дата: {app.DateTime}")
             else:
                 print("Заявка не найдена. ⛔")
+
 
         elif choice == "0":
             break
