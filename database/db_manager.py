@@ -4,8 +4,9 @@ from config import DB_NAME
 
 # Функция для подключения к базе данных
 def get_connection():
-    # Возвращает объект соединения с указанной базой данных
+    # Получаем соединение с указанной базой данных
     conn = sqlite3.connect(DB_NAME)
+    # Включаем контроль внешних ключей
     conn.execute("PRAGMA foreign_keys = ON")
     return conn
 
