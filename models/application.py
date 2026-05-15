@@ -22,6 +22,7 @@ class Application:
 
     # Вспомогательные функции
 
+
 def get_all_applications():
     """Возвращает все заявки"""
     conn = get_connection()
@@ -38,6 +39,7 @@ def get_all_applications():
         for row in rows
     ]
     
+
 def get_application_by_id(ApplicationID):
     """Возвращает заявку по ApplicationID"""
     conn = get_connection()
@@ -53,4 +55,3 @@ def get_application_by_id(ApplicationID):
             ApplicationID=row[0], ParticipantID=row[1], EventID=row[2], StaffID=row[3], DateTime=row[4]
         )
     return None
-                           

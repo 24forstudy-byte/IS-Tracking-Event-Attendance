@@ -44,6 +44,7 @@ class Event:
 
 # Вспомогательные функции
 
+
 def get_all_events():
     """Возвращает все мероприятия"""
     conn = get_connection()
@@ -61,6 +62,7 @@ def get_all_events():
         for row in rows
     ]
     
+
 def get_event_by_id(EventID):
     """Возвращает мероприятие по ID"""
     conn = get_connection()
@@ -76,4 +78,3 @@ def get_event_by_id(EventID):
             EventID=row[0], EventTypeID=row[1], PlaceID=row[2], Title=row[3], DateTime=row[4], Status=row[5]
         )
     return None
-                           

@@ -1,7 +1,7 @@
 from database.db_manager import get_connection
 
 class Participant:
-    def __init__ (self, ParticipantID=None, FullName=None, Phone=None, Mail=None):
+    def __init__(self, ParticipantID=None, FullName=None, Phone=None, Mail=None):
         self.ParticipantID = ParticipantID
         self.FullName = FullName
         self.Phone = Phone
@@ -38,6 +38,7 @@ class Participant:
 
 # Вспомогательные функции
 
+
 def get_all_participants():
     """Возвращает список всех участников"""
     conn = get_connection()
@@ -48,6 +49,7 @@ def get_all_participants():
     rows = cursor.fetchall()
     conn.close()
     return [Participant(ParticipantID=row[0], FullName=row[1], Phone=row[2], Mail=row[3]) for row in rows]
+
 
 def get_participant_by_id(ParticipantID):
     """Возвращает участника по ParticipantID"""

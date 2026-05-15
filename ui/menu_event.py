@@ -2,6 +2,7 @@ from models.event import Event, get_all_events, get_event_by_id
 from models.event_type import get_all_event_types, get_event_type_by_id
 from models.place import get_all_places, get_place_by_id
 
+
 def menu_event():
     while True:
         print("\n=== Мероприятия 🎪 ===")

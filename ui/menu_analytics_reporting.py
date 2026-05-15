@@ -2,6 +2,7 @@ from models.event import get_all_events, get_event_by_id
 from models.application import get_all_applications
 from models.participant import get_participant_by_id
 
+
 def menu_reports():
     """Меню аналитики и отчётности"""
     while True:
@@ -47,7 +48,6 @@ def menu_reports():
         elif choice == "3":
             print("\n=== Статистика по мероприятиям и участникам ===")
             events = get_all_events()
-            all_participants_count = 0  
             all_apps = get_all_applications()
             total_events = len(events)
             total_apps = len(all_apps)

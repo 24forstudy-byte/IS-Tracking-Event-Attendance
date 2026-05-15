@@ -1,7 +1,7 @@
 from database.db_manager import get_connection
 
 class EventType:
-    def __init__ (self, EventTypeID=None, Title=None):
+    def __init__(self, EventTypeID=None, Title=None):
         self.EventTypeID = EventTypeID
         self.Title = Title
 
@@ -36,6 +36,7 @@ class EventType:
 
 # Вспомогательные функции
 
+
 def get_all_event_types():
     """Возвращает список всех типов мероприятий"""
     conn = get_connection()
@@ -46,6 +47,7 @@ def get_all_event_types():
     rows = cursor.fetchall()
     conn.close()
     return [EventType(EventTypeID=row[0], Title=row[1]) for row in rows]
+
 
 def get_event_type_by_id(EventTypeID):
     """Возвращает тип мероприятия по EventTypeID"""

@@ -2,6 +2,7 @@ from models.place import Place, get_all_places, get_place_by_id
 from models.event_type import EventType, get_all_event_types, get_event_type_by_id
 from models.staff import Staff, get_all_staffs
 
+
 def menu_references():
     """Главное меню справочников"""
     while True:
@@ -22,6 +23,7 @@ def menu_references():
             break
         else:
             print("Неверный ввод. 🛑")
+
 
 def menu_place():
     """Меню управления местами"""
@@ -82,6 +84,7 @@ def menu_place():
         else:
             print("Неверный ввод. 🛑")
 
+
 def menu_event_type():
     """Меню управления типами мероприятий"""
     while True:
@@ -137,6 +140,7 @@ def menu_event_type():
         else:
             print("Неверный ввод. 🛑")
 
+
 def menu_staff():
     """Меню управления персоналом"""
     while True:
@@ -186,4 +190,3 @@ def menu_staff():
             break
         else:
             print("Неверный ввод. 🛑")
-            

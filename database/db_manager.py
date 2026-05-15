@@ -2,6 +2,7 @@ import sqlite3
 # Импорт имени файла базы данных из конфигурационного файла
 from config import DB_NAME
 
+
 # Функция для подключения к базе данных
 def get_connection():
     # Получаем соединение с указанной базой данных
@@ -9,6 +10,7 @@ def get_connection():
     # Включаем контроль внешних ключей
     conn.execute("PRAGMA foreign_keys = ON")
     return conn
+
 
 # Функция инициализации базы данных: создаёт все таблицы, если они ещё не существуют
 def initialize_db():

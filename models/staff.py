@@ -1,7 +1,7 @@
 from database.db_manager import get_connection
 
 class Staff:
-    def __init__ (self, StaffID=None, FullName=None, Phone=None, Mail=None):
+    def __init__(self, StaffID=None, FullName=None, Phone=None, Mail=None):
         self.StaffID = StaffID
         self.FullName = FullName
         self.Phone = Phone
@@ -27,6 +27,7 @@ class Staff:
     
 # Вспомогательная функция
 
+
 def get_all_staffs():
     """Возвращает список всего персонала"""
     conn = get_connection()
@@ -37,4 +38,3 @@ def get_all_staffs():
     rows = cursor.fetchall()
     conn.close()
     return [Staff(StaffID=row[0], FullName=row[1], Phone=row[2], Mail=row[3]) for row in rows]
-

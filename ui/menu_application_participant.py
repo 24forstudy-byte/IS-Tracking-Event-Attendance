@@ -4,6 +4,7 @@ from models.event import get_all_events, get_event_by_id
 from models.staff import get_all_staffs
 from datetime import datetime
 
+
 def menu_application_participant():
     """Точка входа в управление заявками и участниками"""
     while True:
@@ -20,6 +21,7 @@ def menu_application_participant():
             break
         else:
             print("Неверный ввод. 🛑")
+
 
 def menu_participant():
     """Меню управления участниками"""
@@ -150,8 +152,8 @@ def menu_application():
                 e_title = event.Title if event else "—"
                 s_name = staff_name if staff_name else "—"
                 print(f"{a.ApplicationID}. Участник: {p_name}\n"
-              f"Мероприятие: {e_title}\nСотрудник: {s_name}\n"
-              f"Дата: {a.DateTime}")
+                      f"Мероприятие: {e_title}\nСотрудник: {s_name}\n"
+                      f"Дата: {a.DateTime}")
 
         elif choice == "2":
             # Выбор участника
@@ -176,14 +178,12 @@ def menu_application():
             if not event or event.Status == "Архивировано":
                 print("Мероприятие не найдено или архивировано. ⛔")
                 continue
-
-            
             all_apps = get_all_applications()
             already = [a for a in all_apps if a.ParticipantID == participant_id and a.EventID == event_id]
             if already:
                 print("Участник уже зарегистрирован на это мероприятие. ⛔")
                 continue
-            
+
             date_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
             app = Application(
@@ -215,7 +215,6 @@ def menu_application():
                       f"Дата: {app.DateTime}")
             else:
                 print("Заявка не найдена. ⛔")
-
 
         elif choice == "0":
             break

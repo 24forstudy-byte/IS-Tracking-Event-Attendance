@@ -5,6 +5,7 @@ from ui.menu_application_participant import menu_application_participant
 from ui.menu_analytics_reporting import menu_reports
 from ui.menu_references import menu_references
 
+
 def main():
     initialize_db()
 
@@ -24,6 +25,7 @@ def main():
             break
         else:
             print("Неверный ввод.")
+
 
 if __name__ == "__main__":
     main()

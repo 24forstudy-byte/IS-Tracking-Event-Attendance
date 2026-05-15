@@ -1,7 +1,8 @@
 from database.db_manager import get_connection
 
+
 class Place:
-    def __init__ (self, PlaceID=None, Title=None, Address=None):
+    def __init__(self, PlaceID=None, Title=None, Address=None):
         self.PlaceID = PlaceID
         self.Title = Title
         self.Address = Address
@@ -37,6 +38,7 @@ class Place:
 
 # Вспомогательные функции
 
+
 def get_all_places():
     """Возвращает список всех мест"""
     conn = get_connection()
@@ -47,6 +49,7 @@ def get_all_places():
     rows = cursor.fetchall()
     conn.close()
     return [Place(PlaceID=row[0], Title=row[1], Address=row[2]) for row in rows]
+
 
 def get_place_by_id(PlaceID):
     """Возвращает место по PlaceID"""
