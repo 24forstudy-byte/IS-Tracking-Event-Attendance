@@ -11,6 +11,7 @@ def menu_event():
         print("3. Обновить мероприятие")
         print("4. Удалить мероприятие")
         print("5. Архивировать мероприятие")
+        print("6. Поиск мероприятия")
         print("0. Назад в главное меню")
         choice = input("Выберите действие: ")
 
@@ -132,6 +133,23 @@ def menu_event():
             else:
                 event.archive()
                 print("Мероприятие архивировано!👍")
+
+        elif choice == "6":
+            print("\n=== Поиск мероприятия 🔍 ===")
+            query = input("Введите часть названия: ")
+            events = get_all_events()
+            found = [e for e in events if query.lower() in e.Title.lower()]
+            if not found:
+                print("Ничего не найдено. 🛑")
+            else:
+                print(f"\nНайдено {len(found)} мероприятий:")
+                for e in found:
+                    event_type = get_event_type_by_id(e.EventTypeID)
+                    place = get_place_by_id(e.PlaceID)
+                    type_title = event_type.Title if event_type else "—"
+                    place_title = place.Title if place else "—"
+                    print(f"{e.EventID}. Тип: {type_title} | Место: {place_title} | "
+                          f"Название: {e.Title} | Дата: {e.DateTime} | Статус: {e.Status}")
 
         elif choice == "0":
             break

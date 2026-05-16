@@ -20,6 +20,20 @@ class Application:
         conn.commit()
         conn.close()
 
+    def update(self, new_participant_id, new_event_id):
+        """Обновляет участника и/или мероприятие в существующей заявке"""
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            UPDATE Application
+            SET ParticipantID = ?, EventID = ?
+            WHERE ApplicationID = ?
+        """, (new_participant_id, new_event_id, self.ApplicationID))
+        conn.commit()
+        conn.close()
+        self.ParticipantID = new_participant_id
+        self.EventID = new_event_id
+
     # Вспомогательные функции
 
 

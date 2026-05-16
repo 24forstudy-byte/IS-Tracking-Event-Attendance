@@ -133,6 +133,7 @@ def menu_application():
         print("1. Показать все заявки")
         print("2. Зарегистрировать заявку")
         print("3. Получить заявку")
+        print("4. Редактировать заявку")
         print("0. Назад в главное меню")
         choice = input("Выберите действие: ")
 
@@ -215,6 +216,58 @@ def menu_application():
                       f"Дата: {app.DateTime}")
             else:
                 print("Заявка не найдена. ⛔")
+
+        elif choice == "4":
+            print("\n=== Редактирование заявки ===")
+            app_id = int(input("Введите ID заявки для редактирования: "))
+            app = get_application_by_id(app_id)
+            if not app:
+                print("Заявка не найдена. ⛔")
+                continue
+
+            event = get_event_by_id(app.EventID)
+            if event and event.Status == "Архивировано":
+                print("Нельзя редактировать заявку на архивированное мероприятие. ⛔")
+                continue
+
+            print("\nТекущий участник (ID):", app.ParticipantID)
+            print("Доступные участники:")
+            participants = get_all_participants()
+            for p in participants:
+                print(f"{p.ParticipantID}. {p.FullName}")
+            new_participant_id_str = input("Введите ID нового участника (оставьте поле пустым, чтобы не изменять значение): ")
+            new_participant_id = int(new_participant_id_str) if new_participant_id_str else app.ParticipantID
+            if new_participant_id != app.ParticipantID:
+                if not get_participant_by_id(new_participant_id):
+                    print("Новый участник не найден. ⛔")
+                    continue
+
+            print("\nТекущее мероприятие (ID):", app.EventID)
+            print("Доступные мероприятия:")
+            all_events = get_all_events()
+            active_events = [e for e in all_events if e.Status != "Архивировано"]
+            for e in active_events:
+                print(f"{e.EventID}. {e.Title} ({e.DateTime})")
+            new_event_id_str = input("Введите ID нового мероприятия (оставьте поле пустым, чтобы не изменять значение): ")
+            new_event_id = int(new_event_id_str) if new_event_id_str else app.EventID
+            if new_event_id != app.EventID:
+                event_check = get_event_by_id(new_event_id)
+                if not event_check or event_check.Status == "Архивировано":
+                    print("Мероприятие не найдено или архивировано. ⛔")
+                    continue
+
+            if new_participant_id != app.ParticipantID or new_event_id != app.EventID:
+                all_apps = get_all_applications()
+                duplicate_exists = any(
+                    a.ApplicationID != app_id and a.ParticipantID == new_participant_id and a.EventID == new_event_id
+                    for a in all_apps
+                )
+                if duplicate_exists:
+                    print("Участник уже зарегистрирован на это мероприятие. ⛔")
+                    continue
+
+            app.update(new_participant_id, new_event_id)
+            print("Заявка обновлена! 🖌️")
 
         elif choice == "0":
             break
